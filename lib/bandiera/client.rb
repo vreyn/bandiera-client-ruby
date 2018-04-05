@@ -124,11 +124,11 @@ module Bandiera
     rescue => e
       message = "Bandiera::Client - UNHANDLED EXCEPTION #{e.inspect} - CLASS #{e.class.name}"
       logger.error(message)
-      raise
+      return_upon_error
     end
 
     def get(path, params, passed_http_opts)
-      default_http_opts = { method: :get, timeout: timeout, headers: headers, params: clean_params(params) }
+      default_http_opts = { method: :get, timeout: @timeout, headers: headers, params: clean_params(params) }
       resource = Typhoeus::Request.new("#{@base_uri}#{path}", default_http_opts.merge(passed_http_opts))
       response = resource.run
 
