@@ -124,7 +124,7 @@ module Bandiera
     rescue => e
       message = "Bandiera::Client - UNHANDLED EXCEPTION #{e.inspect} - CLASS #{e.class.name}"
       logger.error(message)
-      raise
+      return_upon_error
     end
 
     def get(path, params, passed_http_opts)
